@@ -15,6 +15,9 @@ set -euo pipefail
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 DESTS=("$HOME/.claude/skills" "$HOME/.agents/skills")
 
+# Count of existing non-symlink entries left alone; see the FORCE=1 guard below.
+refused=0
+
 # Collect the repo's skills once, link into every destination. `deprecated/`
 # is retired, and `misc/` is kept around but rarely used and not promoted (see
 # each bucket's own README): neither belongs in a daily-driver skill
@@ -52,11 +55,27 @@ for DEST in "${DESTS[@]}"; do
     src="${srcs[$i]}"
     target="$DEST/$name"
 
+    # A real file or directory here (rather than a symlink this script made) is
+    # something the user put there by hand, so removing it would destroy their
+    # own work. Refuse by default, and let them opt in with FORCE=1.
     if [ -e "$target" ] && [ ! -L "$target" ]; then
-      rm -rf "$target"
+      if [ "${FORCE:-}" = "1" ]; then
+        rm -rf "$target"
+      else
+        echo "refusing to replace $target: it is not a symlink." >&2
+        echo "  move it aside and re-run, or re-run with FORCE=1 to overwrite it." >&2
+        refused=$((refused + 1))
+        continue
+      fi
     fi
 
     ln -sfn "$src" "$target"
     echo "linked $name -> $src ($DEST)"
   done
 done
+
+if [ "$refused" -gt 0 ]; then
+  echo >&2
+  echo "error: left $refused existing entr$([ "$refused" -eq 1 ] && echo y || echo ies) untouched; those skills are not linked." >&2
+  exit 1
+fi

@@ -17,6 +17,16 @@ Sets up a PreToolUse hook that intercepts and blocks dangerous git commands befo
 
 When blocked, Claude sees a message telling it that it does not have authority to access these commands.
 
+Matching tolerates the global flags that can sit before a subcommand (`git -C <path> push`, `git -c <key>=<value> push`) and any run of whitespace, so the obvious near-misses do not walk past it.
+
+## What This Is Not
+
+This hook is **friction, not a security boundary**. It pattern-matches a shell string, and no regex wins that game: `g=push; git $g`, a shell alias, `sh -c "..."`, or a base64-decoded command all slip past it. It guards against an agent's own mistakes, not against a determined adversary.
+
+For a real boundary, use `permissions.deny` in `settings.json`, which the harness enforces rather than a regex. Run both if you want: the hook gives a clearer message at the moment of the mistake.
+
+The hook **fails closed**: input it cannot parse (malformed JSON, no `jq` on the system, empty stdin) is blocked rather than waved through, so a broken environment cannot silently disable it.
+
 ## Steps
 
 ### 1. Ask scope
@@ -86,10 +96,17 @@ Ask if user wants to add or remove any patterns from the blocked list. Edit the 
 
 ### 5. Verify
 
-Run a quick test:
+Run three tests, covering a block, a fail-closed, and a pass:
 
 ```bash
-echo '{"tool_input":{"command":"git push origin main"}}' | <path-to-script>
+# 1. Blocks a dangerous command (exit 2, BLOCKED on stderr)
+echo '{"tool_input":{"command":"git -C /repo push origin main"}}' | <path-to-script>
+
+# 2. Fails closed on unparseable input (exit 2)
+echo 'not-json' | <path-to-script>
+
+# 3. Lets a safe command through (exit 0, no output)
+echo '{"tool_input":{"command":"git status"}}' | <path-to-script>
 ```
 
-Should exit with code 2 and print a BLOCKED message to stderr.
+If test 2 exits `0`, the script is the old fail-open version: replace it, since a guardrail that waves through what it cannot read is worse than none.
