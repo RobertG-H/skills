@@ -10,68 +10,38 @@
 
 # Skills For Real Engineers
 
-[![skills.sh](https://skills.sh/b/mattpocock/skills)](https://skills.sh/mattpocock/skills)
+[![forked from mattpocock/skills](https://img.shields.io/badge/forked%20from-mattpocock%2Fskills-blue)](https://github.com/mattpocock/skills)
 
-My agent skills that I use every day to do real engineering - not vibe coding.
+My agent skills for doing real engineering, not vibe coding.
+
+This is my personal fork of [mattpocock/skills](https://github.com/mattpocock/skills), renamed so it is unambiguously mine and installs without colliding with the upstream plugin. The skills themselves are Matt's work, MIT licensed; the changes here are mine.
 
 Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit try to help by owning the process. But while doing so, they take away your control and make bugs in the process hard to resolve.
 
-These skills are designed to be small, easy to adapt, and composable. They work with any model. They're based on decades of engineering experience. Hack around with them. Make them your own. Enjoy.
+These skills are designed to be small, easy to adapt, and composable. They work with any model. They're based on decades of engineering experience.
 
-If you want to keep up with changes to these skills, and any new ones I create, you can join ~60,000 other devs on my newsletter:
+## Installation
 
-[Sign Up To The Newsletter](https://www.aihero.dev/s/skills-newsletter)
-
-## Installation (30-second setup)
-
-Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.com/docs/en/plugins)** installs the whole set as a managed, read-only bundle that updates when I ship, so you subscribe rather than fork. **[skills.sh](https://skills.sh/mattpocock/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one: installing both leaves you with every skill twice.
+This fork is not published to any marketplace, so you install it from a local clone. It ships as a Claude Code plugin only.
 
 ### 1. Get the skills
 
-<details>
-<summary><strong>Claude Code</strong></summary>
+```bash
+git clone https://github.com/RobertG-H/skills.git
+claude plugin marketplace add ./skills
+claude plugin install robert-skills@robert
+```
+
+After you edit a skill or pull new commits, pick the changes up with:
 
 ```bash
-claude plugins install mattpocock-skills
+claude plugin marketplace update robert
+claude plugin update robert-skills
 ```
 
-Or, from inside a session:
+Don't also install upstream's `mattpocock-skills`: you would end up with two copies of every skill.
 
-```
-/plugin install mattpocock-skills
-```
-
-It's in Claude Code's official marketplace, so there's nothing to add first, and updates arrive automatically.
-
-</details>
-
-<details>
-<summary><strong>Codex, and other agents</strong></summary>
-
-```bash
-npx skills@latest add mattpocock/skills
-```
-
-Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.**
-
-A native Codex plugin is on the roadmap (see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
-
-</details>
-
-<details>
-<summary><strong>For tinkerers</strong></summary>
-
-Use the same installer, on any agent, including Claude Code:
-
-```bash
-npx skills@latest add mattpocock/skills
-```
-
-It writes the skills into your repo as ordinary files you own and can edit. Nothing updates behind your back; pull my latest changes when you want them with `npx skills update`.
-
-</details>
-
-### 2. Run `/setup-matt-pocock-skills`
+### 2. Run `/setup-robert-skills`
 
 In your agent, run it once per repo. It will:
 
@@ -119,7 +89,7 @@ I felt the same tension with my agents. Agents are usually dropped into a projec
 Example
 </summary>
 
-Here's an example [glossary](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md) (still named `CONTEXT.md` at that pinned commit, from before the skills renamed the convention), from my `course-video-manager` repo. Which one is easier to read?
+Here's an example [glossary](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md) (still named `CONTEXT.md` at that pinned commit, from before the skills renamed the convention), from Matt's `course-video-manager` repo. Which one is easier to read?
 
 - **BEFORE**: "There's a problem when a lesson inside a section of a course is made 'real' (i.e. given a spot in the file system)"
 - **AFTER**: "There's a problem with the materialization cascade"
@@ -191,11 +161,11 @@ Skills I use daily for code work.
 
 **User-invoked**
 
-- **[ask-matt](./skills/engineering/ask-matt/SKILL.md)**: Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
+- **[ask-robert](./skills/engineering/ask-robert/SKILL.md)**: Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
 - **[triage](./skills/engineering/triage/SKILL.md)**: Move issues through a state machine of triage roles.
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
-- **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)**: Configure this repo for the engineering skills (issue tracker, triage labels, domain doc layout). Run once per repo before using the other engineering skills.
+- **[setup-robert-skills](./skills/engineering/setup-robert-skills/SKILL.md)**: Configure this repo for the engineering skills (issue tracker, triage labels, domain doc layout). Run once per repo before using the other engineering skills.
 - **[to-spec](./skills/engineering/to-spec/SKILL.md)**: Turn the current conversation into a spec and publish it to the issue tracker. No interview, just synthesizes what you've already discussed.
 - **[to-tickets](./skills/engineering/to-tickets/SKILL.md)**: Break any plan, spec, or conversation into a set of tracer-bullet tickets, each declaring its blocking edges, written as text in a local file, or as native blocking links on a real tracker.
 - **[implement](./skills/engineering/implement/SKILL.md)**: Build the work described by a spec or set of tickets, driving `/tdd` at pre-agreed seams and closing out with `/code-review` before committing.

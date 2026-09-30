@@ -1,15 +1,15 @@
 {
-  "name": "mattpocock",
+  "name": "robert",
   "owner": {
-    "name": "Matt Pocock",
-    "url": "https://www.aihero.dev"
+    "name": "Robert Graham-Hu",
+    "url": "https://github.com/RobertG-H"
   },
-  "description": "Matt Pocock's skills for real engineering, as an installable Claude Code plugin.",
+  "description": "Robert Graham-Hu's skills for real engineering, as a locally installable Claude Code plugin.",
   "plugins": [
     {
-      "name": "mattpocock-skills",
+      "name": "robert-skills",
       "source": "./",
-      "description": "Matt Pocock's agent skills for real engineering (grilling, spec/ticket flows, TDD, code review, domain modelling and more).",
+      "description": "Robert Graham-Hu's agent skills for real engineering (grilling, spec/ticket flows, TDD, code review, domain modelling and more).",
       "category": "engineering",
       "keywords": [
         "engineering",

@@ -1,11 +1,11 @@
 {
-  "name": "mattpocock-skills",
+  "name": "robert-skills",
   "version": "1.2.3",
   "private": true,
-  "description": "Matt Pocock's agent skills for real engineering",
+  "description": "Robert Graham-Hu's agent skills for real engineering",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mattpocock/skills"
+    "url": "https://github.com/RobertG-H/skills"
   },
   "license": "MIT",
   "scripts": {

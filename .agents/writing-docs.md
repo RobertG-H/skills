@@ -6,7 +6,7 @@ Most of these skills are **user-invoked**: the agent will never fire them for yo
 
 Act whenever a promoted skill is added, renamed, or has its behaviour changed: create or re-sync its docs page. A rename moves the file too (`docs/<bucket>/<old>.md` → `docs/<bucket>/<new>.md`), because the published URL tracks the name; a skill that moves between `engineering/` and `productivity/` moves its docs file to the matching folder. Skills in `misc/`, `in-progress/`, and `deprecated/` get no page, because none of those buckets is promoted. A skill moving *out* of one of them into `engineering/` or `productivity/` gains a page; one moving the other way loses it. A promoted skill that is removed outright keeps its page as an **archived** page: leave the body as it was and open it with a blockquote notice (`> **Archived.** ...`) naming the version it was removed in and any replacement, so the published URL keeps resolving.
 
-Because these pages are published on `aihero.dev`, **every link is absolute**: never a repo-relative path. A link to another skill points at `https://aihero.dev/skills-<name>`; a link into the repo points at its full `https://github.com/mattpocock/skills/...` URL. A relative link that works in the repo breaks once published.
+These pages were written for publication on `aihero.dev`, so **links are absolute by default**: a link to another skill points at `https://aihero.dev/skills-<name>`, and a link into the repo points at its full `https://github.com/mattpocock/skills/...` URL. Two exceptions hold in this fork. A skill renamed here (`ask-robert`, `setup-robert-skills`) has no page on `aihero.dev`, so link it repo-relative instead. And this fork's docs are not published anywhere, so a relative link no longer breaks the way it would upstream.
 
 There is no H1. The published page takes its title from the slug.
 
@@ -33,7 +33,7 @@ How and when you reach for the skill, in two beats that are both effectively alw
 
 ## Prerequisites
 
-Optional: include only when the skill needs something in place to be functional; omit the heading entirely otherwise. Covers: a **workspace it writes into** (a stateful skill like `grill-with-docs` writes `GLOSSARY.md` and ADRs; `teach` builds a whole directory, so say what it writes and where), **prior setup** (`triage`/`to-spec`/`to-tickets` need `setup-matt-pocock-skills` to have configured an issue tracker), or **repo-specific tooling**. A stateless skill that runs anywhere has no prerequisites, so drop the section.
+Optional: include only when the skill needs something in place to be functional; omit the heading entirely otherwise. Covers: a **workspace it writes into** (a stateful skill like `grill-with-docs` writes `GLOSSARY.md` and ADRs; `teach` builds a whole directory, so say what it writes and where), **prior setup** (`triage`/`to-spec`/`to-tickets` need `setup-robert-skills` to have configured an issue tracker), or **repo-specific tooling**. A stateless skill that runs anywhere has no prerequisites, so drop the section.
 
 ## <free-form middle>
 
@@ -48,7 +48,7 @@ The questions readers really ask about this skill, each in bold with the answer 
 An observed question always beats an invented one, so go and find them before you write any:
 
 - **The wiki.** If `~/repos/matt/personal-wiki` exists on this machine, it is the richest source there is. Its `wiki/audience/` area is organised around what the audience wants, discusses, and **is confused by**: read `wiki/index.md` first for the registry of pages, then the pages bearing on this skill. Every page carries `sources:` linkbacks to the original X, Discord, GitHub, and email threads; the wiki is a secondary source, so quote the asker's own question rather than the wiki's summary of it. Skip this bullet where the directory does not exist.
-- **This repo's issues.** `gh issue list --repo mattpocock/skills --search "<skill-name>" --state all`. A question filed twice is a question the page owes an answer to.
+- **Upstream's issues.** `gh issue list --repo mattpocock/skills --search "<skill-name>" --state all`. Deliberately upstream, not this fork: that is where the questions about these skills are actually filed. A question filed twice is a question the page owes an answer to.
 - **`CHANGELOG.md`.** Anything renamed, moved, or behaviourally changed generates a "where did it go?" that the page has to answer.
 
 Where the hunt comes up thin, the section may also carry a question a reader would plainly ask, but **the count stays honest to the evidence**. A well-discussed skill earns six; an obscure one earns one or two, or none at all. Padding a thin skill out to match a rich one is how the section fills with questions nobody has, and an invented question teaches the reader nothing.
@@ -63,9 +63,9 @@ A few bullets naming what the reader sees when the skill is doing its job. The b
 
 Always present. Situate the skill in the system in a sentence or two:
 
-- **Role.** Name it: a **chain step** (`grill-with-docs → to-spec → to-tickets → implement → code-review`), a **run-once setup** (`setup-matt-pocock-skills`), **periodic maintenance** (`improve-codebase-architecture`, "every few days"), or a **reach-for-it-anytime standalone** (`diagnosing-bugs`, `prototype`, `handoff`). A standalone's map is one honest sentence, which is far better than omitting the section.
+- **Role.** Name it: a **chain step** (`grill-with-docs → to-spec → to-tickets → implement → code-review`), a **run-once setup** (`setup-robert-skills`), **periodic maintenance** (`improve-codebase-architecture`, "every few days"), or a **reach-for-it-anytime standalone** (`diagnosing-bugs`, `prototype`, `handoff`). A standalone's map is one honest sentence, which is far better than omitting the section.
 - **Neighbours.** The one or two siblings that matter, each with a because-clause, linked absolutely.
-- **The map.** Point to [ask-matt](https://aihero.dev/skills-ask-matt), the router over the whole set, so this page stays a node and never has to redraw the graph.
+- **The map.** Point to [ask-robert](../docs/engineering/ask-robert.md), the router over the whole set, so this page stays a node and never has to redraw the graph.
 
 </page-template>
 
@@ -85,7 +85,7 @@ Always present. Situate the skill in the system in a sentence or two:
 - `## What it does` states the defining constraint, as plain prose rather than a labelled aside.
 - The page names no author and quotes no author: every claim stands on its own.
 - `## When to reach for it` states invocation mode and the trigger boundary.
-- `## Where it fits` names the role and links to `ask-matt`.
+- `## Where it fits` names the role and links to `ask-robert`.
 - A prerequisite (workspace, prior setup, tooling) is stated where one exists, and the section is absent where none does.
 - The middle surfaces the leading word.
 - Every AI Coding Dictionary term the page uses is spelt the dictionary's way, and its first use (and only its first use) links to the dictionary entry.

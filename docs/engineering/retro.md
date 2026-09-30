@@ -78,4 +78,4 @@ Run it after a build worth learning from, in the same session or pointed at that
 - [code-review](https://aihero.dev/skills-code-review) is the reviewer agent `retro` most often tunes: new coding standards land where its Standards axis reads them.
 - [writing-for-agents](https://aihero.dev/skills-writing-for-agents) sets the writing style for every steering file and skill `retro` proposes, and `retro` loads it before it starts.
 
-[ask-matt](https://aihero.dev/skills-ask-matt) routes across the whole set when you are unsure which skill the situation wants.
+[ask-robert](./ask-robert.md) routes across the whole set when you are unsure which skill the situation wants.
